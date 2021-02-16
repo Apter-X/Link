@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Link.Asp.Mvc.Models;
 
 namespace Link.Data
 {
@@ -12,5 +13,6 @@ namespace Link.Data
             : base(options)
         {
         }
+        public DbSet<Link.Asp.Mvc.Models.People> People { get; set; }
     }
 }
