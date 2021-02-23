@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Link.Asp.Mvc.Models;
 using Link.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Link.Asp.Mvc.Controllers
 {
@@ -45,9 +46,9 @@ namespace Link.Asp.Mvc.Controllers
         }
 
         // GET: People/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
-
             return View();
         }
 
@@ -68,6 +69,7 @@ namespace Link.Asp.Mvc.Controllers
         }
 
         // GET: People/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,6 +90,7 @@ namespace Link.Asp.Mvc.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id")] People people)
         {
             if (id != people.Id)
@@ -119,6 +122,7 @@ namespace Link.Asp.Mvc.Controllers
         }
 
         // GET: People/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,6 +143,7 @@ namespace Link.Asp.Mvc.Controllers
         // POST: People/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var people = await _context.People.FindAsync(id);
