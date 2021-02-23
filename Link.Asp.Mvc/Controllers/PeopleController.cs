@@ -22,6 +22,7 @@ namespace Link.Asp.Mvc.Controllers
         // GET: People
         public async Task<IActionResult> Index()
         {
+           
             return View(await _context.People.ToListAsync());
         }
 
@@ -46,6 +47,7 @@ namespace Link.Asp.Mvc.Controllers
         // GET: People/Create
         public IActionResult Create()
         {
+
             return View();
         }
 
@@ -54,7 +56,7 @@ namespace Link.Asp.Mvc.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] People people)
+        public async Task<IActionResult> Create([Bind("Id, FirstName, LastName, Address, PostalCode")] People people)
         {
             if (ModelState.IsValid)
             {
