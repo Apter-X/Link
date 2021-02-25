@@ -91,7 +91,7 @@ namespace Link.Asp.Mvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] People people)
+        public async Task<IActionResult> Edit(int id, [Bind("Id, FirstName, LastName, Address, PostalCode")] People people)
         {
             if (id != people.Id)
             {
