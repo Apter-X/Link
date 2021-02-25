@@ -21,9 +21,16 @@ namespace Link.Asp.Mvc.Controllers
         }
 
         // GET: People
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-           
+            var people = from p in _context.People
+                         select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return View(people.Where(s => s.FirstName.Contains(searchString)));
+            }
+
             return View(await _context.People.ToListAsync());
         }
 
