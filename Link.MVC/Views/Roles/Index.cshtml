@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Roles Management";
+}
+
+<form method="post" asp-action="addrole" asp-controller="roles">
+    <div class="input-group">
+        <input name="roleName" class="form-control w-25">
+        <span class="input-group-btn">
+            <button class="btn btn-info">Add New Role</button>
+        </span>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+                    <th scope="col" class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var role in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => role.Name)</td>
+                    <td>@Html.DisplayFor(model => role.Id)</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Action
+                            </button>
+                            <div class="dropdown-menu shadow animated--grow-in">
+                                <a class="dropdown-item">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
+                                <form class="d-inline">
+                                    <a class="dropdown-item"><i class="fas fa-trash-alt"></i> Delete</a>
+                                </form>
+                                @if (role.Name != "SuperAdmin")
+                                {
+                                    <a style='margin-right:16px' asp-controller="Permission" asp-action="Index" asp-route-roleId="@role.Id" class="dropdown-item">
+                                        <i class="fas fa-wrench"></i> Manage Permissions
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
